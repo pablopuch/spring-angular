@@ -1,0 +1,71 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Marca</th>
+        <th scope="col">Modelo</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Stock</th>
+        <th scope="col" class="buttonsBlock"> <button class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop" (click)="newModal()">Nuevo</button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let zapa of zapas, let i=index">
+        <th scope="row">{{zapa.id}}</th>
+        <td>{{zapa.marca}}</td>
+        <td>{{zapa.modelo}}</td>
+        <td>{{zapa.numero}} </td>
+        <td>{{zapa.stock}} </td>
+        <td class="buttonsBlock">
+          <button class="btn btn-danger btn-sm" (click)="deleteZapa(zapa.id, i)">Eliminar</button>
+          <button class="btn btn-warning btn-sm" data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop" (click)="editModal(zapa.id, i)" >Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">{{modalMode}} zapa</h5>
+
+
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form #newZapaForm="ngForm" (ngSubmit)="addZapa()">
+        <div class="modal-body">
+
+          <label for="marca" class="form-label">Marca</label>
+          <input type="text" [(ngModel)]="zapa.marca" name="marca" class="form-control" id="marca" required/>
+          <br>
+          <label for="modelo" class="form-label">Modelo</label>
+          <input type="text" [(ngModel)]="zapa.modelo" name="modelo" class="form-control" id="modelo" required/>
+          <br>
+          <label for="stock" class="form-label">Numero</label>
+          <input type="number" [(ngModel)]="zapa.numero" name="numero" class="form-control" id="numero" required/>
+          <br>
+          <label for="stock" class="form-label">Stock</label>
+          <input type="number" [(ngModel)]="zapa.stock" name="stock" class="form-control" id="stock" required/>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!newZapaForm.form.valid" data-bs-dismiss="modal">Guardar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
